@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewpoint" content="width=device-width initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Pitching App</title>
+</head>
+
+<body>
+    <script type="module">
+        function updateGraph(id) {
+            document.getElementById('graph').src="./PitchingGraphs/" + `${id}` + ".png";
+        }
+        
+        const buttons = document.querySelectorAll(".btn");
+
+        // loop through each button and add a click event listener
+        buttons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            // do something when the button is clicked
+            graph.src = ("./PitchingGraphs/" + `${button.id}` + ".png");
+        });
+        });
+
+    </script>
+
+    <img class="img" id="graph" src="./PitchingGraphs/pitchingGraph1.png"></img>
+    <nav id="navbar">
+        <h class="heading">Pitching Stats<br></h>
+        <h class="sub-heading">2022-2023 Regular Season</h>
+        <img class="player-img" src="https://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/39832.png&w=350&h=254"> </img>
+        <h1 class="player-name">Shohei Ohtani</h1>
+        <div class="team-topic">
+            <h2 class="graph-heading">Visualizations</h2>
+            <button class="btn" id="pitchingGraph1">Fastballs (4-seam) in SZ<br></button>
+            <button class="btn" id="pitchingGraph2">Fastballs (cut) in SZ<br></button>
+            <button class="btn" id="pitchingGraph3">Fastballs (split) in SZ<br></button>
+            <button class="btn" id="pitchingGraph4">Sweepers in SZ<br></button>
+            <button class="btn" id="pitchingGraph5">Sinkers in SZ<br></button>
+            <button class="btn" id="pitchingGraph6">Sliders in SZ<br></button>
+            <button class="btn" id="pitchingGraph7">Curveball in SZ<br></button>
+            <button class="btn" id="pitchingGraph8">Breaks vs. Swinging Strikes<br></button>
+            <button class="btn" id="pitchingGraph9">Pitch Type vs. Speed<br></button>
+            <button class="btn" id="pitchingGraph10">Spin Direction vs. Count<br></button>
+        </div>
+    </nav>
+</body>
+
+</html>

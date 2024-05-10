@@ -1,0 +1,178 @@
+---
+title: "Pitching Visualizations"
+author: "Sahara Moses"
+date: "2024-05-10"
+output: html_document
+---
+
+```{r setup, include=TRUE}
+library(jsonlite)
+library(ggplot2)
+
+foo1 <- fromJSON("data.json")
+
+
+x <- c(-.71,.71,.71,-.71,-.71)
+z <- c(1.5,1.5,3.5,3.5,1.5)
+#store in dataframe
+sz <- data.frame(x,z)
+
+test <- foo1$isInZone == 1
+
+sub <- foo1[foo1$isInZone == 1,]
+sub1 <- foo1[foo1$isInZone == 0,]
+(sum(fastBalls4$isInZone))/length(fastBalls4)
+
+fastBalls4 <- foo1[foo1$pitchType == "Fastball (4-seam)",]
+fastBallsCut <- foo1[foo1$pitchType == "Fastball (cut)",]
+fastBallsSplit <- foo1[foo1$pitchType == "Fastball (split)",]
+sweeper <- foo1[foo1$pitchType == "Sweeper",]
+sinker <- foo1[foo1$pitchType == "Sinker",]
+slider <- foo1[foo1$pitchType == "Slider",]
+curveball <- foo1[foo1$pitchType == "Curveball",]
+
+nrow(fastBalls4) + nrow(fastBallsCut) + nrow(fastBallsSplit) + nrow(sweeper) + nrow(sinker) + nrow(slider) + nrow(curveball)
+
+unique(foo1$pitchType)
+
+ggplot() +
+  geom_point(data = sub , aes(x = plateX, y = plateZ), size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "red") +
+  coord_equal() +
+  labs(title="Pitches Relative to Strike Zone")
+
+min(foo1$plateX, na.rm = TRUE)
+max(foo1$plateX, na.rm = TRUE)
+min(foo1$plateZ, na.rm = TRUE)
+max(foo1$plateZ, na.rm = TRUE)
+
+foo1$swingingStrike <- foo1$isSwingingStrike == 1
+
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+
+# SCATTER PLOTS
+
+# Fastball (4-Seam)
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Fastball (4-seam)",], aes(x = plateX, y = plateZ), color="red", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Fastball (4-seam)")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(fastBalls4$isInZone)/nrow(fastBalls4) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Fastball (4-Seam) Relative to Strike Zone",
+      x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+# Fastball (cut)
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Fastball (cut)",], aes(x = plateX, y = plateZ), color="orange", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Fastball (cut)")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(fastBallsCut$isInZone)/nrow(fastBallsCut) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Fastball (cut) Relative to Strike Zone",
+       x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+# Fastball (split)
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Fastball (split)",], aes(x = plateX, y = plateZ), color="gold", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Fastball (split)")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(fastBallsSplit$isInZone)/nrow(fastBallsSplit) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Fastball (split) Relative to Strike Zone",
+       x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+# Sweeper
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Sweeper",], aes(x = plateX, y = plateZ), color="green", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Sweeper")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(sweeper$isInZone)/nrow(sweeper) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Sweeper Relative to Strike Zone",
+       x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+# Sinker
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Sinker",], aes(x = plateX, y = plateZ), color="blue", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Sinker")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(sinker$isInZone)/nrow(sinker) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Sinker Relative to Strike Zone",
+       x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+# Slider
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Slider",], aes(x = plateX, y = plateZ), color="purple", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Slider")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(slider$isInZone)/nrow(slider) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Slider Relative to Strike Zone",
+       x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+# Curveball
+ggplot() +
+  geom_point(data = foo1[foo1$pitchType == "Curveball",], aes(x = plateX, y = plateZ), color="magenta", size=0.5)+
+  geom_path(data = sz, aes(x=x, y=z), colour = "black") +
+  geom_text(aes(4.25, 5, label=paste("n =", sum(foo1$pitchType == "Curveball")))) +
+  geom_text(aes(4.25, 4.5, label=paste(round(sum(curveball$isInZone)/nrow(curveball) * 100, digits=2), "% in SZ"))) +
+  coord_equal() +
+  lims(x = c(-4,5), y = c(-1.5,6.5)) +
+  labs(title="Curveball Relative to Strike Zone",
+       x="X Coord of Ball at Plate Relative to Home (ft)", y="Z Coord of Ball at Plate Relative to Home (ft)")
+
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+
+# SCATTER PLOT WITH CATEGORY COLORING
+
+ggplot(
+  data = foo1, 
+  aes(x = hBreak, y = vBreak)) +
+  guides(fill = guide_legend(title = "Title")) +
+  geom_point(size=0.15, aes(color = swingingStrike)) +
+  coord_equal() +
+  labs(title = "Vertical Break Vs. Horizonal Break Vs. Swinging Strike",
+       x = "Horizontal Break (ft)",
+       y = "Vertical Break (ft)") +
+  scale_color_manual(values=c("orange", "blue"))
+
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+
+# Pitch Type vs. Velocity Box Plot
+
+ggplot(foo1[foo1$pitchType != "Unknown",], aes(x=pitchType, y=velocity, fill=pitchType)) + 
+  geom_boxplot() +
+  labs(title = "Pitch Type vs. Velocity (mph)",
+       x = "Pitch Type",
+       y = "Velocity (mph)")
+
+########################################################################################################################
+########################################################################################################################
+########################################################################################################################
+
+# Radial Plot of Spin Direction
+
+ggplot(foo1, aes(x = spinDirection)) +
+  geom_histogram(binwidth = 1, alpha = 0.8, fill="blue") +
+  coord_polar(start = 100) +
+  theme_minimal() +
+  labs(title = "Pitch Spin Direction vs. Count",
+       x = "Spin Direction (Angle)",
+       y = "Count")
+
+
+```
