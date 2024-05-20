@@ -1,0 +1,149 @@
+:root {
+  --text-color: rgb(226, 226, 226);
+  --background-color: rgb(255, 249, 237);
+}
+
+body {
+  font-family: system-ui;
+  background: white;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  /*   font-family: sans-serif "Bebas Neue"; */
+  box-sizing: content-box;
+  margin: none;
+  top: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.img {
+  position: fixed;
+  top: 7%;
+  left: 30%;
+  width: 65%;
+}
+
+#navbar {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  width: 24vw;
+  height: 100vh;
+  display: block;
+  font-size: 30px;
+  border-right: 3px solid darkgrey;
+  box-shadow: 5px 0px 5px -2px darkgrey;
+  background-color: #142338;
+  color: var(--text-color);
+}
+
+.heading {
+  margin-top: 10vw;
+  font-size: 2vw;
+  position: relative;
+}
+
+.sub-heading {
+  margin-top: 10%;
+  font-size: 1.5vw;
+  position: relative;
+}
+
+.graph-heading {
+  font-size: 2.2vw;
+  padding-bottom: 0.5vh;
+  margin-bottom: 10;
+  position: relative;
+}
+
+.player-img {
+  position: relative;
+  z-index: 1;
+  background: hsla(0, 50%, 98%, 0.561);
+  width: 100%;
+  padding-left: 0;
+  border-radius: 4%;
+}
+
+.player-name {
+  width: 100%;
+  margin: 0;
+  position: relative;
+  display: block;
+  margin-bottom: 2vh;
+  font-size: 2.2vh;
+}
+
+button.btn {
+  background: none;
+  border: none;
+  width: 100%;
+  font-size: 1.5vw;
+  text-align: left;
+  padding-left: 4vh;
+  margin-bottom: 1vh;
+  color: var(--text-color);
+}
+
+button.btn:hover {
+  color: rgb(104, 101, 101);
+}
+
+.svg-circle {
+  fill: rgb(255, 0, 0);
+}
+
+.svg-circle:hover {
+  fill: rgb(0, 126, 11);
+}
+
+.axesGrid {
+  color: white;
+}
+
+.axesLabel {
+  font-size: 1.2em;
+}
+
+
+.strikeZone {
+  fill: none;
+  outline: black solid 2px;
+}
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--background-color);
+}
+
+.svg {
+  position: absolute;
+  top: 5vh;
+  left: 35vw;
+  background: lightgrey;
+}
+
+.background {
+  position: absolute;
+  top: 0vh;
+  left: 32vw;
+  background: var(--background-color);
+}
+
+#tooltip {
+  position: absolute;
+  visibility: hidden;
+  background-color: white;
+  border: solid;
+  border-width: 0px;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 2px 2px 20px;
+  opacity: 0.9;
+  z-index: 5;
+}
