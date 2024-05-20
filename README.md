@@ -1,6 +1,6 @@
 Pitching App V2 just released!
 
-This application is distinct from the first version in that its focus is javascript to visualize and display the pitching data (specifcially JS's D3 Library) with a focus on being dynamic and data-driven.
+This application is distinct from the first version in that its focus is on using javascript to visualize and display the pitching data (specifcially JS's D3 Library) with a particular focus on being dynamic and data-driven.
 
 The main goal when desigining this app was to provide a front end that is agnostic to the data being fed in so that, in theory, it could be reused for any kind of pitching data from any pitcher.
 The scales on the graphs adjust to the data itself, so there shouldn't be any annoying re-scaling to do when the data changes.
