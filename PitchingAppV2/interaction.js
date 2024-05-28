@@ -158,7 +158,7 @@ function generateGraph(pitchType) {
     // Get data and data specific
     const pitchData = getDataByFieldVal(data, "pitchType", pitchType);
     const max = getAbsMax(pitchData, "plateX", "plateZ");
-    const szPercent = parseFloat(pitchData.filter(({ isInZone }) => isInZone === 1).length * 100 / data.length).toFixed(2)
+    const szPercent = parseFloat(pitchData.filter(({ isInZone }) => isInZone === 1).length * 100 / pitchData.length).toFixed(2)
 
     var background = d3.select('body')
         .append('svg')
